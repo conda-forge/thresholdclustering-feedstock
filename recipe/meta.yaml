@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/thresholdclustering-{{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/thresholdclustering-{{ version }}.tar.gz
     sha256: af27ceec7a4a8903e1b34e0d57ac28a42deb7d2beff3c403330579b11525bee1
   - url: https://raw.githubusercontent.com/imarquart/python-threshold-clustering/main/HISTORY.md
     sha256: 14b891d78505ccda16d349e8d3144439882ac8ee24f099709144ee044cbf35e8
@@ -14,14 +14,14 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - numpy
     - networkx
 
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/IngoMarquart/python-threshold-clustering
